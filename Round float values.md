@@ -29,15 +29,19 @@ console.log(roundedNo2); // 1, wrong
 
 ## Correct result
 
-```js
-const round = (num, precision) =>
-  Number(Math.round(num + "e+" + precision) + "e-" + precision);
+```ts
+const roundFloatToFixed = (num: number, precision: number):number => {
+    if (!Number.isInteger(precision)) throw new Error('precision is not an integer');
+
+    return (Number(Math.round(Number(num + "e+" + precision)) + "e-" + precision))
+}
+
 
 const no1 = 12312214.124124124;
-const roundedNo1 = round(no1, 2);
+const roundedNo1 = roundFloatToFixed(no1, 2);
 console.log(roundedNo1); // 12312214.12, correct
 
 const no2 = 1.005;
-const roundedNo2 = round(no2, 2);
+const roundedNo2 = roundFloatToFixed(no2, 2);
 console.log(roundedNo2); // 1.01, correct
 ```
